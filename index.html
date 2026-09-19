@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billy Joel Media References</title>
+<meta name="description" content="Every Billy Joel song referenced in a movie or TV show - sortable and filterable">
+<meta name="author" content="Chad Schmitz">
+<meta name="copyright" content="2026">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<!-- Tablesorter theme + pager CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.32.0/css/theme.metro-dark.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.32.0/css/jquery.tablesorter.pager.min.css">
+<!-- jQuery, tablesorter + widgets, pager -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/widgets/widget-pager.min.js"></script>
+<!-- SheetJS for reading the XLSX file -->
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<style>
+  /* Custom styles for pager and filters (matches site convention) */
+  .pager-controls {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .pager-controls.pager-top {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  .tablesorter-filter-row {
+    background-color: #f0f0f0;
+  }
+  .tablesorter-filter {
+    width: 95%;
+    padding: 4px;
+    margin: 2px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  /* Table type formatting */
+  #myTable {
+    font-size: 14px;
+  }
+  #myTable td.col-song {
+    font-weight: bold;
+  }
+  #myTable td.col-title {
+    font-style: italic;
+  }
+  #myTable td.col-episode {
+    color: #ff5722;
+  }
+  #myTable td.col-timestamp {
+    color: #2e7d32;
+    font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+  }
+</style>
+</head>
+<body class="w3-black">
+
+<div class="w3-main">
+  <header class="w3-container">
+    <h3 class="w3-margin-top-small"><b>&#127925; Billy Joel Media References</b></h3>
+    <p class="w3-text-light-grey">His songs played or mentioned in movies and TV shows &mdash; sortable, filterable, searchable.</p>
+  </header>
+
+  <div class="w3-container">
+    <div id="loading" class="w3-text-light-grey w3-padding">Loading media references&hellip;</div>
+
+    <!-- Pager Controls (top) -->
+    <div class="pager-controls pager-top w3-dark-grey">
+      <div class="w3-row">
+        <div class="w3-col m2">
+          <div class="w3-padding">
+            <span class="w3-small">Page size: </span>
+            <select class="pagesize">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="50">50</option>
+              <option value="999999">All</option>
+            </select>
+          </div>
+        </div>
+        <div class="w3-col m8">
+          <div class="w3-padding w3-center">
+            <button class="first w3-button w3-blue w3-small w3-round">First</button>
+            <button class="prev w3-button w3-blue w3-small w3-round">Prev</button>
+            <span class="pagedisplay"></span>
+            <button class="next w3-button w3-blue w3-small w3-round">Next</button>
+            <button class="last w3-button w3-blue w3-small w3-round">Last</button>
+          </div>
+        </div>
+        <div class="w3-col m2">
+          <div class="w3-padding w3-right">
+            <button class="reset-filters w3-button w3-blue w3-small w3-round">Reset Filters</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table id="myTable" class="w3-table-all tablesorter">
+      <thead>
+        <tr class="w3-sticky" id="table-head-row"></tr>
+        <!-- Filter row will be automatically added by tablesorter -->
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+
+    <!-- Pager Controls (bottom) -->
+    <div class="pager-controls w3-dark-grey">
+      <div class="w3-row">
+        <div class="w3-col m2">
+          <div class="w3-padding">
+            <span class="w3-small">Page size: </span>
+            <select class="pagesize">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="50">50</option>
+              <option value="999999">All</option>
+            </select>
+          </div>
+        </div>
+        <div class="w3-col m8">
+          <div class="w3-padding w3-center">
+            <button class="first w3-button w3-blue w3-small w3-round">First</button>
+            <button class="prev w3-button w3-blue w3-small w3-round">Prev</button>
+            <span class="pagedisplay"></span>
+            <button class="next w3-button w3-blue w3-small w3-round">Next</button>
+            <button class="last w3-button w3-blue w3-small w3-round">Last</button>
+          </div>
+        </div>
+        <div class="w3-col m2">
+          <div class="w3-padding w3-right">
+            <button class="reset-filters w3-button w3-blue w3-small w3-round">Reset Filters</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- External JavaScript -->
+<script src="billyjoeltable.js?v=6"></script>
+</body>
+</html>
